@@ -1,3 +1,5 @@
+export type ThemeMode = 'dark' | 'light' | 'system';
+
 export type DashboardView = 'home' | 'analytics' | 'activity' | 'settings';
 
 export interface SidebarItem {
@@ -16,6 +18,7 @@ export interface DashboardState {
   sidebarOpen: boolean;
   slideover: SlideoverContent | null;
   activeView: DashboardView;
+  theme: ThemeMode;
   sidebarItems: SidebarItem[];
 }
 
@@ -24,7 +27,8 @@ export type DashboardAction =
   | { type: 'SET_SIDEBAR'; open: boolean }
   | { type: 'OPEN_SLIDEOVER'; content: SlideoverContent }
   | { type: 'CLOSE_SLIDEOVER' }
-  | { type: 'SET_VIEW'; view: DashboardView };
+  | { type: 'SET_VIEW'; view: DashboardView }
+  | { type: 'SET_THEME'; theme: ThemeMode };
 
 export type BentoCardVariant = 'default' | 'wide' | 'tall' | 'featured';
 

@@ -8,7 +8,7 @@ Premium dark bento grid dashboard built with Next.js 16, Tailwind CSS v4, shadcn
 
 - **app/** — Next.js App Router pages and layout
 - **components/ui/** — shadcn/ui primitives (button, etc.)
-- **components/islands/** — Island components (sidebar, slideover, bento-card)
+- **components/islands/** — Island components (layout, sidebar, slideover, bento-card)
 - **lib/** — Utilities and context (dashboard-context, utils)
 - **types/** — TypeScript type definitions
 
@@ -17,9 +17,16 @@ Premium dark bento grid dashboard built with Next.js 16, Tailwind CSS v4, shadcn
 - Card variants: `default`, `wide` (col-span-2), `tall` (row-span-2), `featured` (both)
 - Dark premium theme with near-black base (#0a0a0f) and warm gold accents (#c8a45c)
 
+## Layout
+- `Layout` component wraps all pages with Sidebar + Header + SlideOver
+- Header has breadcrumbs, theme toggle dropdown, and user avatar
+- Sidebar responsive: overlay on mobile, collapsible on desktop
+- SlideOver panel has focus trapping, escape key close, and ARIA modal attributes
+
 ## State Management
 - `DashboardContext` via React context + useReducer (in lib/dashboard-context.tsx)
-- Global state: sidebar toggle, slideover content, active view
+- Global state: sidebar toggle, slideover content, active view, theme (dark/light/system)
+- Theme persists to localStorage, listens for system preference changes
 
 ## Key Commands
 - `npm run dev` — Start dev server

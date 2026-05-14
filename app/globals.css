@@ -38,6 +38,28 @@
   --overlay: rgba(0, 0, 0, 0.6);
 }
 
+.light {
+  --bg-primary: #f5f5f7;
+  --bg-secondary: #eeeef2;
+  --bg-tertiary: #e6e6eb;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f8f8fc;
+  --bg-sidebar: #fafafe;
+  --text-primary: #16161e;
+  --text-secondary: #5e5e6e;
+  --text-muted: #7a7a8a;
+  --accent-gold: #bf973b;
+  --accent-gold-light: #d4a84a;
+  --accent-gold-muted: rgba(191, 151, 59, 0.10);
+  --border-subtle: rgba(0, 0, 0, 0.07);
+  --border-accent: rgba(191, 151, 59, 0.25);
+  --overlay: rgba(0, 0, 0, 0.3);
+}
+
+.dark {
+  /* Dark mode is the default — already set in :root */
+}
+
 body {
   background: var(--bg-primary);
   color: var(--text-primary);
