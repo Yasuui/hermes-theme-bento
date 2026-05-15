@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono, Space_Grotesk, JetBrains_Mono } from 'next/font/google';
+import { Geist, Geist_Mono, Space_Grotesk, JetBrains_Mono, Inter } from 'next/font/google';
 import './globals.css';
 import { DashboardProvider } from '@/lib/dashboard-context';
 
@@ -23,6 +23,12 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
 });
 
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+});
+
 export const metadata: Metadata = {
   title: 'Bento Dashboard — Hermes Agent Theme',
   description:
@@ -37,7 +43,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} ${inter.variable} antialiased`}
       >
         <DashboardProvider>{children}</DashboardProvider>
       </body>

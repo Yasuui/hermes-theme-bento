@@ -68,6 +68,19 @@
 }
 
 /* ------------------------------------------------------------------ */
+/*  Bento Card Glass                                                  */
+/* ------------------------------------------------------------------ */
+
+.bento-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(255,230,203,0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------------ */
 /*  Background Texture (SVG feTurbulence)                             */
 /* ------------------------------------------------------------------ */
 
@@ -103,19 +116,18 @@ body::after {
 body {
   background: var(--bg-primary);
   color: var(--text-primary);
-  font-family: var(--font-sans, Arial, Helvetica, sans-serif);
+  font-family: var(--font-inter, var(--font-sans));
   scrollbar-width: thin;
   scrollbar-color: var(--border-subtle) transparent;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-space-grotesk, var(--font-sans));
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
-code, pre, kbd {
+.font-mono, code, pre, kbd {
   font-family: var(--font-jetbrains-mono, var(--font-mono));
 }
 

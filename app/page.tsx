@@ -7,43 +7,8 @@ import ModelsIsland from '@/components/islands/models-island';
 import SkillsIsland from '@/components/islands/skills-island';
 import LogsHud from '@/components/islands/logs-hud';
 import McpIsland from '@/components/islands/mcp-island';
+import { ExternalLink } from 'lucide-react';
 import { useDashboard } from '@/lib/dashboard-context';
-
-function StatCard({
-  label,
-  value,
-  change,
-  icon,
-}: {
-  label: string;
-  value: string;
-  change: string;
-  icon: React.ReactNode;
-}) {
-  const isPositive = change.startsWith('+');
-  return (
-    <div className="flex items-center justify-between">
-      <div className="flex items-center gap-3">
-        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent-gold-muted text-accent-gold">
-          {icon}
-        </div>
-        <div>
-          <p className="text-xs text-text-muted">{label}</p>
-          <p className="text-lg font-semibold text-text-primary">{value}</p>
-        </div>
-      </div>
-      <span
-        className={`rounded-full px-2 py-0.5 text-[11px] font-medium ${
-          isPositive
-            ? 'bg-emerald-500/10 text-emerald-400'
-            : 'bg-red-500/10 text-red-400'
-        }`}
-      >
-        {change}
-      </span>
-    </div>
-  );
-}
 
 function ActivityItem({
   user,
@@ -121,87 +86,57 @@ export default function Home() {
       <main id="main-content" className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         <h1 className="sr-only">Dashboard Overview</h1>
 
-        {/* Stat: Revenue */}
+        {/* Stat: Active Sessions */}
         <BentoCard
-          title="Revenue"
-          description="Monthly recurring"
+          title="ACTIVE SESSIONS"
+          description="3 running · 9 idle"
           index={0}
-          icon={
-            <svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <line x1="12" x2="12" y1="2" y2="22" />
-              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-            </svg>
-          }
         >
-          <StatCard
-            label="This month"
-            value="$48,290"
-            change="+12.5%"
-            icon={
-              <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+          <div className="flex items-end justify-between">
+            <p className="text-4xl font-mono text-[var(--text-primary)]">12</p>
+            <div className="flex flex-col items-end gap-2">
+              <span className="rounded px-1.5 py-0.5 text-[11px] font-mono bg-[rgba(0,232,122,0.12)] text-[#00e87a]">+2</span>
+              <svg width="60" height="24" viewBox="0 0 60 24" aria-hidden="true">
+                <polyline points="0,20 10,16 20,18 30,10 40,14 50,8 60,12"
+                  fill="none" stroke="#00e87a" strokeWidth="1.5"
+                  strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
-            }
-          />
-        </BentoCard>
-
-        {/* Stat: Users */}
-        <BentoCard
-          title="Active Users"
-          description="Daily average"
-          index={1}
-          icon={
-            <svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-              <circle cx="9" cy="7" r="4" />
-              <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-            </svg>
-          }
-        >
-          <StatCard
-            label="Today"
-            value="2,847"
-            change="+8.2%"
-            icon={
-              <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-              </svg>
-            }
-          />
-        </BentoCard>
-
-        {/* Stat: Active Now */}
-        <BentoCard
-          title="Active Now"
-          description="Currently online"
-          index={2}
-          icon={
-            <svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <circle cx="12" cy="12" r="10" />
-              <polyline points="12 6 12 12 16 14" />
-            </svg>
-          }
-        >
-          <div className="flex items-center gap-2">
-            <span className="relative flex h-3 w-3" aria-label="143 users online">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" aria-hidden="true" />
-              <span className="relative inline-flex h-3 w-3 rounded-full bg-emerald-500" aria-hidden="true" />
-            </span>
-            <span className="text-sm font-medium text-text-primary">143</span>
-            <span className="text-xs text-text-muted">users</span>
+            </div>
           </div>
-          <div className="mt-3 flex -space-x-2">
-            {['#c8a45c', '#6c5ce7', '#00b894', '#fd79a8', '#0984e3'].map((c, i) => (
-              <div
-                key={i}
-                className="h-7 w-7 rounded-full border-2 border-bg-card"
-                style={{ backgroundColor: c }}
-                aria-hidden="true"
-              />
-            ))}
-            <div className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-bg-card bg-bg-tertiary text-[10px] font-medium text-text-muted">
-              +12
+        </BentoCard>
+
+        {/* Stat: Models Loaded */}
+        <BentoCard
+          title="MODELS LOADED"
+          description="4 providers · 2 active"
+          index={1}
+        >
+          <div className="flex items-end justify-between">
+            <p className="text-4xl font-mono text-[var(--text-primary)]">8</p>
+            <div className="flex flex-col items-end gap-2">
+              <span className="rounded px-1.5 py-0.5 text-[11px] font-mono bg-[rgba(0,232,122,0.12)] text-[#00e87a]">↑ 1</span>
+              <svg width="60" height="24" viewBox="0 0 60 24" aria-hidden="true">
+                <polyline points="0,20 10,16 20,18 30,10 40,14 50,8 60,12"
+                  fill="none" stroke="#00e87a" strokeWidth="1.5"
+                  strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
+          </div>
+        </BentoCard>
+
+        {/* Stat: Gateway Uptime */}
+        <BentoCard
+          title="GATEWAY UPTIME"
+          description="Last restart 6h ago"
+          index={2}
+        >
+          <div>
+            <p className="text-4xl font-mono text-[#00e87a]">99.2%</p>
+            <div className="mt-3 h-1.5 rounded-full bg-[rgba(255,230,203,0.06)] overflow-hidden">
+              <div className="h-full rounded-full bg-[#00e87a]" style={{ width: '99.2%' }} aria-hidden="true" />
+            </div>
+            <div className="mt-2">
+              <span className="rounded px-1.5 py-0.5 text-[11px] font-mono bg-[rgba(0,232,122,0.12)] text-[#00e87a]">HEALTHY</span>
             </div>
           </div>
         </BentoCard>
@@ -230,7 +165,7 @@ export default function Home() {
               <p className="text-xs text-text-muted">actions today</p>
             </div>
             <div className="flex-1">
-              <MiniBar values={weeklyData} color="#c8a45c" />
+              <MiniBar values={weeklyData} color="#00e87a" />
               <div className="mt-1 flex justify-between text-[10px] text-text-muted" aria-label="Day labels">
                 <span>Mon</span>
                 <span>Wed</span>
@@ -393,29 +328,39 @@ export default function Home() {
           </div>
         </BentoCard>
 
-        {/* Enterprise Plan CTA */}
+        {/* Hermes Info Island */}
         <BentoCard
-          title="Enterprise Plan"
-          description="Unlock premium features"
-          accentColor="#c8a45c"
+          title="HERMES BENTO"
           variant="wide"
           index={13}
-          icon={
-            <svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-            </svg>
-          }
+          icon={<ExternalLink aria-hidden />}
         >
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-xl font-bold text-accent-gold-light">$29/mo</p>
-              <p className="text-xs text-text-muted">
-                Unlimited projects, advanced analytics
-              </p>
-            </div>
-            <button className="rounded-lg bg-accent-gold px-4 py-2 text-xs font-semibold text-bg-primary transition-all hover:bg-accent-gold-light focus-visible:ring-2 focus-visible:ring-accent-gold focus-visible:outline-none focus-visible:ring-offset-2 focus-visible:ring-offset-bg-card">
-              Upgrade
-            </button>
+          <div className="space-y-0">
+            {[
+              { label: 'Version', value: 'v0.1.0' },
+              { label: 'Base', value: 'Hermes Agent v0.13.0' },
+              { label: 'License', value: 'MIT Open Source' },
+              { label: 'Stack', value: 'Next.js 16 · React 19 · Tailwind v4' },
+              { label: 'Islands', value: '5 UI components' },
+            ].map((row) => (
+              <div
+                key={row.label}
+                className="flex justify-between py-2 border-b border-[rgba(255,230,203,0.06)] last:border-0"
+              >
+                <span className="text-xs text-[var(--text-muted)]">{row.label}</span>
+                <span className="text-xs font-mono text-[var(--text-primary)]">{row.value}</span>
+              </div>
+            ))}
+          </div>
+          <div className="mt-3">
+            <a
+              href="https://github.com/Yasuui/hermes-theme-bento"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-mono text-[var(--accent-cream)] hover:underline"
+            >
+              github.com/Yasuui/hermes-theme-bento
+            </a>
           </div>
         </BentoCard>
       </main>

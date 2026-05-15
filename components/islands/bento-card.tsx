@@ -31,39 +31,44 @@ export default function BentoCard({
 }: BentoCardProps) {
   return (
     <div
-      className={`group relative overflow-hidden rounded-xl border border-border-subtle bg-bg-card p-5
+      className={`bento-card relative rounded-lg overflow-hidden
+        border border-[rgba(255,230,203,0.08)]
+        bg-[rgba(10,47,47,0.7)]
+        backdrop-blur-xl
         transition-all duration-200 ease-out
-        hover:border-border-accent hover:bg-bg-card-hover
-        focus-within:ring-2 focus-within:ring-accent-gold focus-within:ring-inset
+        hover:border-[rgba(255,230,203,0.18)]
+        hover:bg-[rgba(10,47,47,0.85)]
+        focus-within:ring-2 focus-within:ring-[rgba(255,230,203,0.3)] focus-within:ring-inset
         animate-in fade-in
+        p-3 sm:p-4
         ${variantClasses[variant]} ${className}`}
-      style={{ animationDelay: `${index * 60}ms` }}
+      style={{
+        animationDelay: `${index * 60}ms`,
+        boxShadow:
+          '0 0 0 1px rgba(255,230,203,0.03), 0 4px 32px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.04)',
+      }}
     >
-      {/* Top accent line */}
-      <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-accent-gold/40 via-accent-gold to-accent-gold/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
       {/* Header */}
-      <div className="mb-3 flex items-start justify-between">
-        <div className="flex items-center gap-3">
+      <div className="flex items-center justify-between mb-4 pb-3 border-b border-[rgba(255,230,203,0.06)]">
+        <div className="flex items-center gap-2">
           {icon && (
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent-gold-muted text-accent-gold transition-colors duration-200 group-hover:bg-accent-gold/20">
+            <span className="text-[var(--text-muted)] [&_svg]:w-4 [&_svg]:h-4" aria-hidden="true">
               {icon}
-            </div>
+            </span>
           )}
           <div>
-            <h3 className="text-sm font-semibold text-text-primary">{title}</h3>
+            <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-[var(--text-muted)]">
+              {title}
+            </p>
             {description && (
-              <p className="mt-0.5 text-xs text-text-muted">{description}</p>
+              <p className="text-xs text-[var(--text-muted)]">{description}</p>
             )}
           </div>
         </div>
       </div>
 
       {/* Body */}
-      {children && <div className="mt-2">{children}</div>}
-
-      {/* Bottom-right corner glow on hover */}
-      <div className="pointer-events-none absolute -bottom-8 -right-8 h-24 w-24 rounded-full bg-accent-gold/5 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
+      {children && <div>{children}</div>}
     </div>
   );
 }
