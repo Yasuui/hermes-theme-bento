@@ -29,12 +29,12 @@
   --bg-sidebar: #0d0d14;
   --text-primary: #f1f1f3;
   --text-secondary: #a1a1aa;
-  --text-muted: #63636e;
+  --text-muted: #8a8a99;
   --accent-gold: #c8a45c;
   --accent-gold-light: #e8c97a;
   --accent-gold-muted: rgba(200, 164, 92, 0.12);
-  --border-subtle: rgba(255, 255, 255, 0.06);
-  --border-accent: rgba(200, 164, 92, 0.25);
+  --border-subtle: #2a2a34;
+  --border-accent: rgba(200, 164, 92, 0.30);
   --overlay: rgba(0, 0, 0, 0.6);
 }
 
@@ -60,15 +60,25 @@
   /* Dark mode is the default — already set in :root */
 }
 
+/* ------------------------------------------------------------------ */
+/*  Base                                                              */
+/* ------------------------------------------------------------------ */
+
 body {
   background: var(--bg-primary);
   color: var(--text-primary);
   font-family: var(--font-sans, Arial, Helvetica, sans-serif);
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-subtle) transparent;
 }
 
-/* Scrollbar styling */
+/* ------------------------------------------------------------------ */
+/*  Scrollbar (WebKit)                                                */
+/* ------------------------------------------------------------------ */
+
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -82,4 +92,37 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--text-muted);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Selection                                                         */
+/* ------------------------------------------------------------------ */
+
+::selection {
+  background: var(--accent-gold-muted);
+  color: var(--accent-gold-light);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Focus-visible (global)                                            */
+/* ------------------------------------------------------------------ */
+
+:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 2px;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Reduced motion                                                    */
+/* ------------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

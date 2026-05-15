@@ -10,6 +10,7 @@ export default function Slideover() {
   const { state, closeSlideover } = useDashboard();
   const { slideover } = state;
   const panelRef = useRef<HTMLDivElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
 
   // Close on Escape
   const handleKeyDown = useCallback(
@@ -33,9 +34,12 @@ export default function Slideover() {
     [closeSlideover],
   );
 
-  // Focus first focusable element on open
+  // Focus management on open/close
   useEffect(() => {
     if (slideover && panelRef.current) {
+      // Save currently focused element
+      previousFocusRef.current = document.activeElement as HTMLElement;
+
       const focusable = panelRef.current.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR);
       const first = focusable[0] as HTMLElement | undefined;
       if (first) first.focus();
@@ -46,6 +50,11 @@ export default function Slideover() {
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = '';
+
+      // Restore focus to previous element when panel closes
+      if (previousFocusRef.current && typeof previousFocusRef.current.focus === 'function') {
+        previousFocusRef.current.focus();
+      }
     };
   }, [slideover, handleKeyDown]);
 
@@ -57,10 +66,11 @@ export default function Slideover() {
       role="dialog"
       aria-modal="true"
       aria-label={slideover.title}
+      aria-labelledby="slideover-title"
     >
       {/* Backdrop — fade in */}
       <div
-        className="absolute inset-0 bg-overlay backdrop-blur-sm animate-in fade-in duration-300"
+        className="absolute inset-0 bg-overlay backdrop-blur-sm animate-in fade-in duration-200"
         onClick={closeSlideover}
         aria-hidden="true"
       />
@@ -68,7 +78,7 @@ export default function Slideover() {
       {/* Panel — slide from right */}
       <div
         ref={panelRef}
-        className="relative flex h-full w-full max-w-lg flex-col border-l border-border-subtle bg-bg-secondary shadow-2xl animate-in slide-in-from-right duration-300"
+        className="relative flex h-full w-full max-w-lg flex-col border-l border-border-subtle bg-bg-secondary shadow-2xl animate-in slide-in-from-right duration-200"
       >
         {/* Header */}
         <div className="flex items-center justify-between border-b border-border-subtle px-6 py-4">
@@ -77,7 +87,7 @@ export default function Slideover() {
           </h2>
           <button
             onClick={closeSlideover}
-            className="flex h-8 w-8 items-center justify-center rounded-lg text-text-muted transition-colors hover:bg-white/5 hover:text-text-primary"
+            className="flex h-8 w-8 items-center justify-center rounded-lg text-text-muted transition-colors hover:bg-white/5 hover:text-text-primary focus-visible:ring-2 focus-visible:ring-accent-gold focus-visible:outline-none"
             aria-label="Close panel"
           >
             <svg
@@ -90,6 +100,7 @@ export default function Slideover() {
               strokeWidth={2}
               strokeLinecap="round"
               strokeLinejoin="round"
+              aria-hidden="true"
             >
               <path d="M18 6l-12 12" />
               <path d="M6 6l12 12" />

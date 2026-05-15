@@ -111,6 +111,8 @@ const DEFAULT_LOGS: LogEntry[] = [
 // --- Sub-components ---
 
 function LoadingPlaceholder() {
+  // Deterministic widths for skeleton placeholders
+  const widths = ['62%', '78%', '65%', '82%', '71%'];
   return (
     <div className="space-y-2 px-3 py-2">
       {Array.from({ length: 5 }).map((_, i) => (
@@ -119,7 +121,7 @@ function LoadingPlaceholder() {
           <div className="h-4 w-12 rounded-full bg-bg-card-hover" />
           <div
             className="h-3 rounded bg-bg-card-hover"
-            style={{ width: `${60 + Math.random() * 30}%` }}
+            style={{ width: widths[i] }}
           />
         </div>
       ))}
@@ -183,9 +185,9 @@ export default function LogsHud({
   onFilterChange,
 }: LogsHudProps) {
   const [activeFilter, setActiveFilter] = useState<LogLevel | 'all'>('all');
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading] = useState(false);
   const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
-  const [logs, setLogs] = useState<LogEntry[]>(initialLogs);
+  const [logs] = useState<LogEntry[]>(initialLogs);
   const scrollRef = useRef<HTMLDivElement>(null);
   const filterBarRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);

@@ -218,7 +218,6 @@ function EmptyState() {
 
 function ModelCard({
   model,
-  index,
   isFocused,
   onToggleFavorite,
 }: {
@@ -383,6 +382,7 @@ function ModelCatalogBody({
 
   /* Reset focus when models change */
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setFocusedIndex(-1);
   }, [models.length]);
 

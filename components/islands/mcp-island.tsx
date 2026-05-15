@@ -265,7 +265,6 @@ function EmptyState({ onAddServer }: { onAddServer?: () => void }) {
 
 function ServerRow({
   server,
-  index,
   isExpanded,
   onToggle,
 }: {
@@ -284,7 +283,7 @@ function ServerRow({
 
   return (
     <div
-      role="listitem"
+      role="button"
       className={cn(
         'rounded-lg border transition-all duration-200',
         'focus-visible:ring-2 focus-visible:ring-accent-gold focus-visible:outline-none',
@@ -453,8 +452,9 @@ function McpIslandBody({
     target?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   }, [focusedIndex]);
 
-  /* Reset focus when servers change */
+  // Reset focus when servers change
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setFocusedIndex(-1);
     setExpandedId(null);
   }, [servers.length]);
@@ -479,11 +479,11 @@ function McpIslandBody({
       onKeyDown={handleKeyDown}
       tabIndex={0}
     >
-      {servers.map((server, i) => (
+      {servers.map((server, index) => (
         <ServerRow
           key={server.id}
+          index={index}
           server={server}
-          index={i}
           isExpanded={expandedId === server.id}
           onToggle={handleToggle}
         />

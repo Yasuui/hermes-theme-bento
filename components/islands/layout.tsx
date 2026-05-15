@@ -150,7 +150,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <Slideover />
 
       {/* Main Content */}
-      <main className="flex flex-1 flex-col overflow-hidden">
+      <main id="main-content" className="flex flex-1 flex-col overflow-hidden">
         {/* Top Bar */}
         <header className="flex h-14 shrink-0 items-center justify-between border-b border-border-subtle px-4 sm:px-6">
           <div className="flex items-center gap-3">

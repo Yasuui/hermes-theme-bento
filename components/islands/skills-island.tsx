@@ -106,7 +106,7 @@ export default function SkillsIsland({
   className = '',
 }: SkillsIslandProps) {
   const [activeCategory, setActiveCategory] = useState<string>('All');
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading] = useState(false);
   const gridRef = useRef<HTMLDivElement>(null);
 
   const filteredSkills =
@@ -279,6 +279,7 @@ export default function SkillsIsland({
               <button
                 key={skill.id}
                 role="option"
+                aria-selected={false}
                 aria-label={`${skill.name} - ${skill.installed ? 'Installed' : 'Not Installed'}`}
                 tabIndex={0}
                 className="group relative flex flex-col gap-2 rounded-lg border border-border-subtle bg-bg-card p-3.5 text-left transition-all duration-200 hover:border-border-accent hover:bg-bg-card-hover focus-visible:ring-2 focus-visible:ring-accent-gold focus-visible:outline-none"

@@ -1,4 +1,6 @@
-import type { ReactNode } from 'react';
+'use client';
+
+import { type ReactNode } from 'react';
 
 interface BentoCardProps {
   title: string;
@@ -8,6 +10,7 @@ interface BentoCardProps {
   accentColor?: string;
   className?: string;
   children?: ReactNode;
+  index?: number;
 }
 
 const variantClasses: Record<string, string> = {
@@ -24,19 +27,26 @@ export default function BentoCard({
   variant = 'default',
   className = '',
   children,
+  index = 0,
 }: BentoCardProps) {
   return (
     <div
-      className={`group relative overflow-hidden rounded-xl border border-border-subtle bg-bg-card p-5 transition-all duration-200 hover:border-border-accent hover:bg-bg-card-hover ${variantClasses[variant]} ${className}`}
+      className={`group relative overflow-hidden rounded-xl border border-border-subtle bg-bg-card p-5
+        transition-all duration-200 ease-out
+        hover:border-border-accent hover:bg-bg-card-hover
+        focus-within:ring-2 focus-within:ring-accent-gold focus-within:ring-inset
+        animate-in fade-in
+        ${variantClasses[variant]} ${className}`}
+      style={{ animationDelay: `${index * 60}ms` }}
     >
       {/* Top accent line */}
-      <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-accent-gold/40 via-accent-gold to-accent-gold/40 opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
+      <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-accent-gold/40 via-accent-gold to-accent-gold/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
       {/* Header */}
       <div className="mb-3 flex items-start justify-between">
         <div className="flex items-center gap-3">
           {icon && (
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent-gold-muted text-accent-gold">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent-gold-muted text-accent-gold transition-colors duration-200 group-hover:bg-accent-gold/20">
               {icon}
             </div>
           )}
@@ -57,3 +67,5 @@ export default function BentoCard({
     </div>
   );
 }
+
+export type { BentoCardProps };

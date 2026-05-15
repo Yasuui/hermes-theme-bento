@@ -14,8 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Bento Dashboard',
-  description: 'Premium dark bento grid dashboard',
+  title: 'Bento Dashboard — Hermes Agent Theme',
+  description:
+    'A premium, accessible Bento Grid dashboard theme for the Hermes Agent ecosystem. Dark mode, WCAG 2.1 AA, responsive design.',
 };
 
 export default function RootLayout({
@@ -24,11 +25,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable}`}
-    >
-      <body className="min-h-screen bg-bg-primary text-text-primary antialiased">
+    <html lang="en" className="dark" suppressHydrationWarning>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
         <DashboardProvider>{children}</DashboardProvider>
       </body>
     </html>

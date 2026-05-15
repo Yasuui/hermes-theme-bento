@@ -237,6 +237,7 @@ export default function ProfilesIsland({
       const timer = setTimeout(() => setLoading(false), 600);
       return () => clearTimeout(timer);
     }
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLoading(false);
   }, [externalProfiles]);
 
