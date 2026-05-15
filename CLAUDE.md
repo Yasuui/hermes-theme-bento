@@ -56,3 +56,17 @@ Each island is a self-contained component wrapping `BentoCard` with theme-aware 
 - NO `@apply` directives — use utility classes directly in JSX
 - NO `@theme` outside the `@theme inline {}` block in globals.css
 - Theme tokens: bg-primary, bg-secondary, bg-card, accent-gold, text-primary, text-secondary, text-muted, border-subtle
+
+## Recent Polish (T10)
+- Staggered animations: BentoCard uses `animate-in fade-in` with `animationDelay: ${index * 60}ms`
+- Focus management: `focus-visible:ring-2 focus-visible:ring-accent-gold focus-visible:outline-none` on all interactive elements
+- Responsive padding: `p-3` on mobile (sm:), `p-4` on desktop
+- Loading/empty/error states: all 5 islands have polished skeleton cards, centered empty icons, error alerts with role='alert'
+- Mobile-first: grid stacks to single column on sm, expands to 2–4 columns on larger screens
+
+## Accessibility (WCAG 2.1 AA)
+- All islands: keyboard navigation (Tab, Arrow keys, Enter/Space, Escape)
+- Focus traps on SlideOver panel
+- ARIA labels, roles, and live region announcements
+- Skip-to-content link at top of Layout
+- Touch targets: min-h-10 min-w-10 throughout
