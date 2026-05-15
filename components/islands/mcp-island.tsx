@@ -106,8 +106,8 @@ const capabilityThemes: Record<string, string> = {
   Web:        'bg-sky-500/10 text-sky-400 border-sky-500/20',
   Search:     'bg-sky-500/10 text-sky-400 border-sky-500/20',
   News:       'bg-sky-500/10 text-sky-400 border-sky-500/20',
-  Git:        'bg-gray-500/10 text-gray-400 border-gray-500/20',
-  Issues:     'bg-gray-500/10 text-gray-400 border-gray-500/20',
+  Git:        'bg-gray-500/10 text-[var(--text-secondary)] border-gray-500/20',
+  Issues:     'bg-gray-500/10 text-[var(--text-secondary)] border-gray-500/20',
   PRs:        'bg-green-500/10 text-green-400 border-green-500/20',
   'Code Review':
                'bg-green-500/10 text-green-400 border-green-500/20',
