@@ -1,60 +1,72 @@
-# CLAUDE.md — Focused Instructions for Claude Code
+@AGENTS.md
 
-> **This file is automatically read by Claude Code at the start of every session.**
-> It provides tactical, project-specific guidance so you can work with maximum focus and minimal distraction.
-> Keep this file concise. Update it when patterns stabilize.
+# hermes-theme-bento
 
-## Project Snapshot
-- **Name:** hermes-theme-bento
-- **Goal:** Tier-3 Bento Grid dashboard theme for Hermes-agent (schema v18289)
-- **Stack:** React + TypeScript + Tailwind CSS v4 (@theme directive) + @hermes/dashboard-data-schema
-- **Key Constraint:** Strict 4-column asymmetric grid. **Never break the grid** on any edit.
-- **Edit Pattern:** All modifications happen in SlideOver / modal. View state stays on the cards.
+Premium dark bento grid dashboard built with Next.js 16, Tailwind CSS v4, shadcn/ui v4.
 
-## Core Rules (Non-Negotiable)
-- Always start by reading the relevant sections of `LLM.md` for architecture, grid spans, and island specs.
-- Use the existing `DashboardContext` for all shared state.
-- Tailwind v4 first. Prefer utilities and `@theme` tokens over custom CSS.
-- TypeScript strict. Prefer small, focused components.
-- Minimal dependencies. Justify any new package.
-- Accessibility & keyboard support where it makes sense for dashboard islands.
-- **Visual QA is mandatory** after layout or styling changes: open browser, check grid integrity, spacing, no overlaps, crisp corners.
+## Architecture
 
-## When Working on This Codebase
-1. **Understand first** — Re-read the island specs and grid rules in LLM.md before editing any component.
-2. **Plan the change** — Think in terms of the 5 islands + SlideOver. Describe the minimal diff needed.
-3. **Implement cleanly** — Follow existing patterns. Use context for data.
-4. **Verify visually** — Start dev server if needed, inspect in browser via computer-use. Confirm the 4-col grid remains perfect.
-5. **Commit discipline** — Use conventional commit messages. Push frequently when working autonomously.
+- **app/** — Next.js App Router pages and layout
+- **components/ui/** — shadcn/ui primitives (button, etc.)
+- **components/islands/** — Island components (layout, sidebar, slideover, bento-card)
+- **lib/** — Utilities and context (dashboard-context, utils)
+- **types/** — TypeScript type definitions
 
-## Common Commands (once scaffolded)
-- `npm run dev` — Start the preview server
-- `npm run build` — Production build check
-- `npm run typecheck` or `tsc --noEmit` — Type safety
+## Bento Grid
+- 4-column responsive grid using Tailwind grid (xl:grid-cols-4)
+- Card variants: `default` (1col), `wide` (col-span-2), `tall` (row-span-2), `featured` (2col x 2row)
+- Dark premium theme with near-black base (#0a0a0f) and warm gold accents (#c8a45c)
 
-(These will be updated as the project evolves. Use `/init` or ask if unsure.)
+## Layout
+- `Layout` component wraps all pages with Sidebar + Header + SlideOver
+- Header has breadcrumbs, theme toggle dropdown, and user avatar
+- Sidebar responsive: overlay on mobile, collapsible on desktop
+- SlideOver panel has focus trapping, escape key close, and ARIA modal attributes
 
-## What to Avoid
-- Expanding cards or breaking the Bento grid layout
-- Adding heavy dependencies without strong justification
-- Assuming data shapes — always reference the schema via imports from `@hermes/dashboard-data-schema`
-- Long inline styles or fighting Tailwind v4
+## State Management
+- `DashboardContext` via React context + useReducer (in lib/dashboard-context.tsx)
+- Global state: sidebar toggle, slideover content, active view, theme (dark/light/system)
+- Theme persists to localStorage, listens for system preference changes
 
-## SlideOver & Edit Flow
-- Trigger SlideOver from any island for edits.
-- Make the sheet feel native and calm (good animation, clear save/cancel, focus management).
-- On successful save, update context and close cleanly.
+## Islands (components/islands/)
+Each island is a self-contained component wrapping `BentoCard` with theme-aware styling.
 
-## For Hermes-Agent Orchestration
-- When Hermes delegates coding work to you (Claude Code), treat this file + LLM.md as your combined context.
-- Focus on one island or one clear task per step when possible.
-- Report progress clearly and push commits often.
+| Island | Variant | Description |
+|--------|---------|-------------|
+| `profiles-island.tsx` | default | Profile selector with avatars, status indicators (online/offline/busy), quick switcher with arrow key navigation |
+| `models-island.tsx` | tall | Model catalog with provider badges (OpenAI/Anthropic/Google/Meta), context length, pricing, favorite toggle |
+| `skills-island.tsx` | featured | Skill grid with category filters (All/Coding/Writing/Research/Data), install status badges, keyboard nav |
+| `logs-hud.tsx` | wide | Real-time log stream with level filtering (All/Info/Warn/Error/Debug), expandable details, auto-scroll |
+| `mcp-island.tsx` | wide | MCP server status display with connection indicators, capability tags, expandable server details |
 
-## Style & Quality Bar
-- Code should feel premium and calm, matching the Bento philosophy.
-- Clean, readable, well-typed.
-- Production-ready from the first commit that touches UI.
+### Island Patterns
+- All islands use `'use client'` directive
+- Keyboard accessible: Tab/Enter/Escape/Arrow keys for navigation
+- Include loading states (skeleton pulse animation) and empty states (icon + message)
+- Focus visible ring: `focus-visible:ring-2 focus-visible:ring-accent-gold focus-visible:outline-none`
+- Use theme CSS variables throughout (no hardcoded colors)
+- Props interfaces exported for external data binding
 
-If something is unclear, re-read LLM.md sections on the specific island or grid rules before proceeding. Ask for clarification only when truly blocked.
+## Key Commands
+- `npm run dev` — Start dev server
+- `npm run build` — Production build
+- `npm run lint` — ESLint
 
-**Stay focused. Respect the grid. Deliver calm, high-quality components.**
+## Tailwind v4 Rules
+- NO `@apply` directives — use utility classes directly in JSX
+- NO `@theme` outside the `@theme inline {}` block in globals.css
+- Theme tokens: bg-primary, bg-secondary, bg-card, accent-gold, text-primary, text-secondary, text-muted, border-subtle
+
+## Recent Polish (T10)
+- Staggered animations: BentoCard uses `animate-in fade-in` with `animationDelay: ${index * 60}ms`
+- Focus management: `focus-visible:ring-2 focus-visible:ring-accent-gold focus-visible:outline-none` on all interactive elements
+- Responsive padding: `p-3` on mobile (sm:), `p-4` on desktop
+- Loading/empty/error states: all 5 islands have polished skeleton cards, centered empty icons, error alerts with role='alert'
+- Mobile-first: grid stacks to single column on sm, expands to 2–4 columns on larger screens
+
+## Accessibility (WCAG 2.1 AA)
+- All islands: keyboard navigation (Tab, Arrow keys, Enter/Space, Escape)
+- Focus traps on SlideOver panel
+- ARIA labels, roles, and live region announcements
+- Skip-to-content link at top of Layout
+- Touch targets: min-h-10 min-w-10 throughout

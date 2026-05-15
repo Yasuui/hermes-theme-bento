@@ -1,0 +1,175 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-tertiary: var(--bg-tertiary);
+  --color-bg-card: var(--bg-card);
+  --color-bg-card-hover: var(--bg-card-hover);
+  --color-bg-sidebar: var(--bg-sidebar);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-accent: var(--accent-cream);
+  --color-accent-light: var(--accent-cream-light);
+  --color-accent-hover: var(--accent-cream-hover);
+  --color-accent-muted: var(--accent-cream-muted);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-accent: var(--border-accent);
+  --color-warm-glow: var(--warm-glow);
+  --color-overlay: var(--overlay);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+:root {
+  /* Hermes v0.13.0 Web Dashboard Theme (Teal + Cream) */
+  --bg-primary: #041c1c;
+  --bg-secondary: #0a2f2f;
+  --bg-tertiary: #0f3a3a;
+  --bg-card: #0a2f2f;
+  --bg-card-hover: #0f3a3a;
+  --bg-sidebar: #052525;
+  --text-primary: #ffffff;
+  --text-secondary: #ffe6cb;
+  --text-muted: #b3ccc4;
+  --accent-cream: #ffe6cb;
+  --accent-cream-light: #ffd699;
+  --accent-cream-hover: #ffd699;
+  --accent-cream-muted: rgba(255, 230, 203, 0.12);
+  --border-subtle: rgba(255, 230, 203, 0.08);
+  --border-accent: rgba(255, 230, 203, 0.18);
+  --warm-glow: rgba(255, 189, 56, 0.35);
+  --overlay: rgba(0, 0, 0, 0.6);
+}
+
+.light {
+  --bg-primary: #f5f9f9;
+  --bg-secondary: #ecf4f4;
+  --bg-tertiary: #e0eded;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f8fcfc;
+  --bg-sidebar: #fafcfc;
+  --text-primary: #041c1c;
+  --text-secondary: #0a5a5a;
+  --text-muted: #4a7070;
+  --accent-cream: #c8804d;
+  --accent-cream-light: #d99566;
+  --accent-cream-hover: #d99566;
+  --accent-cream-muted: rgba(200, 128, 77, 0.10);
+  --border-subtle: rgba(4, 28, 28, 0.08);
+  --border-accent: rgba(200, 128, 77, 0.25);
+  --warm-glow: rgba(255, 189, 56, 0.15);
+  --overlay: rgba(0, 0, 0, 0.25);
+}
+
+.dark {
+  /* Dark mode is the default — already set in :root */
+}
+
+/* ------------------------------------------------------------------ */
+/*  Background Texture (SVG feTurbulence)                             */
+/* ------------------------------------------------------------------ */
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('data:image/svg+xml;utf8,<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" result="noise" /></filter></defs><rect width="100%" height="100%" fill="rgb(4, 28, 28)" filter="url(%23noise)" opacity="0.03" /></svg>');
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Warm glow overlay for subtle depth */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 30% 40%, rgba(255, 189, 56, 0.08), transparent);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Base                                                              */
+/* ------------------------------------------------------------------ */
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans, Arial, Helvetica, sans-serif);
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-subtle) transparent;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-space-grotesk, var(--font-sans));
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+code, pre, kbd {
+  font-family: var(--font-jetbrains-mono, var(--font-mono));
+}
+
+/* ------------------------------------------------------------------ */
+/*  Scrollbar (WebKit)                                                */
+/* ------------------------------------------------------------------ */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-accent);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Selection                                                         */
+/* ------------------------------------------------------------------ */
+
+::selection {
+  background: var(--accent-cream-muted);
+  color: var(--accent-cream-light);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Focus-visible (global)                                            */
+/* ------------------------------------------------------------------ */
+
+:focus-visible {
+  outline: 2px solid var(--accent-cream);
+  outline-offset: 2px;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Reduced motion                                                    */
+/* ------------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,36 +1,38 @@
 ## Description
 
-Please include a summary of the changes and which issue is fixed. Also include relevant motivation and context.
+<!-- Provide a brief summary of the changes in this PR -->
+<!-- If it fixes an issue, reference it here: Fixes #123 -->
 
-Fixes # (issue)
+## Type of Change
 
-## Type of change
-
-- [ ] Bug fix (non-breaking change which fixes an issue)
-- [ ] New feature (non-breaking change which adds functionality)
-- [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
+- [ ] Bug fix (non-breaking change that fixes an issue)
+- [ ] New feature (non-breaking change that adds functionality)
+- [ ] Breaking change (fix or feature that would break existing functionality)
 - [ ] Documentation update
-- [ ] Refactor / Code quality
+- [ ] Refactoring (no functional changes)
+- [ ] Style/UI change
 
 ## How Has This Been Tested?
 
-Please describe the tests that you ran to verify your changes.
+- [ ] `npm run build` passes
+- [ ] `npm run lint` passes
+- [ ] Tested manually in browser (Chrome, Safari, Firefox)
+- [ ] Tested keyboard navigation
+- [ ] Tested with screen reader (if applicable)
 
-- Visual QA in browser (grid integrity, no overlaps)
-- [ ] Yes
-- [ ] N/A
+## Checklist
 
-## Checklist:
-
-- [ ] My code follows the style guidelines of this project
+- [ ] My code follows the project's style guidelines
 - [ ] I have performed a self-review of my own code
-- [ ] I have commented my code, particularly in hard-to-understand areas
-- [ ] I have made corresponding changes to the documentation (LLM.md / README if needed)
-- [ ] My changes generate no new warnings
-- [ ] I have added tests that prove my fix is effective or that my feature works
-- [ ] New and existing unit tests pass locally with my changes
-- [ ] Any dependent changes have been merged and published
+- [ ] I have added type definitions for new props/interfaces
+- [ ] My changes include ARIA attributes where applicable
+- [ ] I have updated documentation (README, ARCHITECTURE) if needed
+- [ ] My changes don't introduce new warnings in the console
 
-## Screenshots (if applicable)
+## Screenshots
 
-Add screenshots or Loom/GIFs to help reviewers understand the visual impact.
+<!-- If applicable, add screenshots to show the visual changes -->
+
+## Additional Context
+
+<!-- Add any other context about the PR here -->

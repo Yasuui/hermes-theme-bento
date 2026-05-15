@@ -1,125 +1,147 @@
-# hermes-theme-bento
+# Hermes Theme Bento — Premium AI Dashboard for Hermes Agent
 
-> A beautiful, compartmentalized **Bento Grid** dashboard theme for the Hermes Agent ecosystem.
+<div align="center">
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![React](https://img.shields.io/badge/React-19+-blue?logo=react)](https://react.dev/)
-[![Tailwind](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
+![Next.js](https://img.shields.io/badge/Next.js-15-000000?style=flat-square&logo=next.js)
+![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?style=flat-square&logo=tailwind-css)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript)
+![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)
 
-**hermes-theme-bento** is a Tier-3 theme package that brings a modern, financial-operating-system-inspired Bento layout to Hermes dashboards. It uses strict 4-column asymmetric grid compartmentalization, subtle borders, and crisp interactions — all while staying fully compatible with `@hermes/dashboard-data-schema`.
+**A premium, open-source dashboard theme built for the Hermes Agent community.**
 
-Built for clarity, focus, and delightful developer & agent experience.
+[Quick Start](#-quick-start) · [Architecture](./ARCHITECTURE.md) · [Contributing](./CONTRIBUTING.md) · [Changelog](./CHANGELOG.md)
 
-## ✨ Core Vision
-
-We believe agent dashboards should feel like calm, organized command centers — not chaotic walls of cards. This theme enforces **rigid spatial rules** so every "island" has its place, edits happen in focused slide-overs (never breaking the grid), and the whole experience stays predictable and beautiful.
-
-Inspired by 2026 Bento patterns seen in modern fintech and productivity tools.
-
-## 🧩 The Five UI Islands
-
-| Island              | Grid Span | Purpose                                      | Key Interactions                  |
-|---------------------|-----------|----------------------------------------------|-----------------------------------|
-| **Profiles**        | 1×3       | Vertical list of agent personas              | Select, quick edit via sheet     |
-| **Models Status**   | 1×1       | Dense square — active model + provider       | View only (or edit in sheet)     |
-| **Skills Manager**  | 1×2       | Active YAML skills with toggles              | Toggle on/off, edit skill        |
-| **Logs HUD**        | 2×2       | Syntax-highlighted streaming reasoning log   | Live tail, filter, copy          |
-| **MCP / Config**    | 2×1       | Connected Model Context Protocol servers     | Horizontal chips, add/remove     |
-
-All "Edit" actions open a beautiful **SlideOver** or modal. The grid never expands or breaks.
-
-## 🚀 Quick Start
-
-### For Hermes Users
-
-This theme is designed to be dropped into your Hermes instance. Once published or linked:
-
-```bash
-# Example (when integrated)
-npm install @hermes/theme-bento
-# or copy the theme folder into your Hermes themes directory
-```
-
-Then select **Bento** as your active dashboard theme in Hermes settings.
-
-### For Developers & Contributors
-
-```bash
-git clone https://github.com/Yasuui/hermes-theme-bento.git
-cd hermes-theme-bento
-npm install
-npm run dev
-```
-
-Open http://localhost:5173 (or your Vite port) to see the living dashboard preview.
-
-## 🛠 Tech Stack & Decisions
-
-- **React** (latest) + TypeScript
-- **Tailwind CSS v4** — using the new `@theme` directive and CSS-first configuration
-- **@hermes/dashboard-data-schema** — single source of truth for all data shapes
-- **Global DashboardContext** — clean state management without prop drilling
-- **SlideOver.tsx** — reusable, accessible edit surface
-- Minimal, high-quality dependencies only (we research before adding anything)
-
-We prioritize:
-- Performance & small bundle
-- Accessibility (keyboard, screen reader, ARIA)
-- Strict visual QA on every change
-- Conventional commits + clean Git history
-
-## 📁 Recommended Project Structure
-
-```
-hermes-theme-bento/
-├── src/
-│   ├── components/
-│   │   ├── islands/          # The five core islands
-│   │   │   ├── Profiles.tsx
-│   │   │   ├── ModelsStatus.tsx
-│   │   │   ├── SkillsManager.tsx
-│   │   │   ├── LogsHUD.tsx
-│   │   │   └── MCPConfig.tsx
-│   │   ├── BentoLayout.tsx   # The 4-col grid orchestrator
-│   │   └── SlideOver.tsx
-│   ├── context/
-│   │   └── DashboardContext.tsx
-│   └── styles/
-│       └── index.css         # Tailwind v4 + theme tokens
-├── manifest.json             # Hermes theme manifest (layoutVariant: "bento")
-├── package.json
-├── tsconfig.json
-├── .github/
-│   └── ISSUE_TEMPLATE/
-├── CONTRIBUTING.md
-├── README.md
-└── LLM.md                    # Living project intelligence for agents
-```
-
-## 🤝 Contributing
-
-We welcome contributions from the Hermes community and beyond!
-
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on:
-- How to set up your local environment
-- Coding standards & Tailwind v4 patterns
-- How to submit PRs
-- Our visual QA expectations
-
-We use **conventional commits** and keep the main branch production-ready at all times.
-
-## 📜 License
-
-This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- The Hermes team and the broader agent tooling community
-- Inspiration from modern Bento dashboard patterns in fintech OSes
-- Built with care by the Rift & Barakah crews (and friends)
+</div>
 
 ---
 
-**Let's build the calmest, most powerful agent dashboards together.**
+Hermes Theme Bento is a reference dashboard UI for agents built on the Hermes ecosystem. It brings together five interactive islands — Profiles, Models, Skills, Logs HUD, and MCP — into a cohesive bento grid layout that looks great out of the box and is built to be extended. Whether you're building a personal agent interface or exploring what a production Hermes setup might look like, this is a solid starting point.
 
-> Maintained with ❤️ by the open-source community. PRs, issues, and feedback always appreciated.
+---
+
+## ✨ Key Features
+
+- **5 functional UI Islands** — Profiles selector, Models catalog, Skills browser, real-time Logs HUD, and MCP server status, each self-contained and ready to wire up to real data
+- **Premium dark theme** — Near-black base (`#0a0a0f`) with warm gold accents (`#c8a45c`), plus full light and system theme support with localStorage persistence
+- **Full keyboard accessibility** — WCAG 2.1 AA compliant; every island supports Tab, Arrow key, Enter/Space, and Escape navigation with visible focus rings throughout
+- **Responsive and mobile-first** — Collapsible sidebar, adaptive bento grid (1–4 columns), and a focus-trapped SlideOver panel that works seamlessly on any screen size
+- **Built with Next.js 15, React 19, and Tailwind CSS v4** — Modern stack, App Router, no legacy patterns
+- **Component-driven architecture** — Islands wrap a shared `BentoCard` primitive and export typed Props interfaces, making them easy to drop into any React app
+
+---
+
+## 🚀 Quick Start
+
+```bash
+# Clone the repo
+git clone https://github.com/NousResearch/hermes-theme-bento.git
+cd hermes-theme-bento
+
+# Install dependencies
+npm install
+
+# Start the dev server
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) and you'll see the dashboard running locally.
+
+---
+
+## 📖 Using with Hermes
+
+This dashboard is designed as a **reference UI for Hermes agents** — a visual layer you can adapt for your own agent projects. It doesn't ship with a backend, but each island is wired to accept real data via props.
+
+**Connecting your agent context:**
+
+The `DashboardContext` (in `lib/dashboard-context.tsx`) manages global state via `useReducer`. You can dispatch actions from anywhere to update the active profile, selected model, or open the SlideOver with dynamic content.
+
+```tsx
+import { useDashboard } from '@/lib/dashboard-context';
+
+const { dispatch } = useDashboard();
+
+// Switch the active Hermes profile
+dispatch({ type: 'SET_ACTIVE_VIEW', payload: 'models' });
+```
+
+**Wiring islands to live data:**
+
+Each island exports its Props interface, so you can pass in your own profiles, model lists, skill registries, or log streams:
+
+```tsx
+import ProfilesIsland from '@/components/islands/profiles-island';
+
+<ProfilesIsland
+  profiles={myHermesProfiles}
+  onProfileChange={(p) => agent.switchProfile(p.id)}
+/>
+```
+
+**Skills integration:** The Skills island accepts a `skills` prop with category metadata. Map your Hermes skill registry directly to the `Skill[]` type in `types/index.ts`.
+
+For more on the Hermes ecosystem, refer to the [Hermes documentation](https://github.com/NousResearch/hermes-agent).
+
+---
+
+## 🏗️ Local Development
+
+```bash
+npm run build    # Production build
+npm run lint     # Run ESLint
+npm start        # Start production server
+```
+
+**File structure at a glance:**
+
+```
+app/                        # Next.js App Router pages and root layout
+components/
+  islands/                  # The 5 dashboard islands + shared BentoCard
+    bento-card.tsx          # Reusable card wrapper (variant: default/wide/tall/featured)
+    layout.tsx              # Shell: header, sidebar, SlideOver
+    profiles-island.tsx
+    models-island.tsx
+    skills-island.tsx
+    logs-hud.tsx
+    mcp-island.tsx
+  ui/                       # shadcn/ui primitives (button, etc.)
+lib/
+  dashboard-context.tsx     # Global state (useReducer + Context)
+  utils.ts                  # Utility functions
+types/
+  index.ts                  # TypeScript definitions for all island data shapes
+```
+
+---
+
+## 🎨 Design Philosophy
+
+**Premium dark aesthetic.** The theme is built around a near-black background (`#0a0a0f`) with warm gold accents (`#c8a45c`) that give it a refined, intentional look — not just "dark mode." Light theme and system preference are supported as first-class options.
+
+**Accessibility first.** Every interactive element has a visible focus ring, ARIA roles, and keyboard support. The SlideOver traps focus correctly and restores it on close. Screen reader announcements are in place for dynamic content. This isn't bolted on — it's part of the grid from the start.
+
+**Component-driven islands.** Each island is fully self-contained, wraps the same `BentoCard` base, and exports typed Props. You can take one island, drop it into a different project, and it works. No hidden global dependencies.
+
+---
+
+## 📝 Contributing
+
+Contributions are welcome and appreciated. Please read the [Contributing Guide](./CONTRIBUTING.md) and [Code of Conduct](./CODE_OF_CONDUCT.md) before opening a PR.
+
+We follow [Conventional Commits](https://www.conventionalcommits.org/) for commit messages:
+
+```
+feat: add theme analyzer island
+fix: correct sidebar z-index on mobile
+docs: clarify Hermes integration example
+```
+
+When in doubt about code style, run `npm run lint` — ESLint will catch most things. Keep islands self-contained and avoid adding abstractions that aren't needed for the immediate task.
+
+---
+
+## 📄 License
+
+[MIT](./LICENSE) © Nous Research
