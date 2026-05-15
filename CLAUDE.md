@@ -13,8 +13,8 @@ Premium dark bento grid dashboard built with Next.js 16, Tailwind CSS v4, shadcn
 - **types/** — TypeScript type definitions
 
 ## Bento Grid
-- 3-column responsive grid using Tailwind grid
-- Card variants: `default`, `wide` (col-span-2), `tall` (row-span-2), `featured` (both)
+- 4-column responsive grid using Tailwind grid (xl:grid-cols-4)
+- Card variants: `default` (1col), `wide` (col-span-2), `tall` (row-span-2), `featured` (2col x 2row)
 - Dark premium theme with near-black base (#0a0a0f) and warm gold accents (#c8a45c)
 
 ## Layout
@@ -27,6 +27,25 @@ Premium dark bento grid dashboard built with Next.js 16, Tailwind CSS v4, shadcn
 - `DashboardContext` via React context + useReducer (in lib/dashboard-context.tsx)
 - Global state: sidebar toggle, slideover content, active view, theme (dark/light/system)
 - Theme persists to localStorage, listens for system preference changes
+
+## Islands (components/islands/)
+Each island is a self-contained component wrapping `BentoCard` with theme-aware styling.
+
+| Island | Variant | Description |
+|--------|---------|-------------|
+| `profiles-island.tsx` | default | Profile selector with avatars, status indicators (online/offline/busy), quick switcher with arrow key navigation |
+| `models-island.tsx` | tall | Model catalog with provider badges (OpenAI/Anthropic/Google/Meta), context length, pricing, favorite toggle |
+| `skills-island.tsx` | featured | Skill grid with category filters (All/Coding/Writing/Research/Data), install status badges, keyboard nav |
+| `logs-hud.tsx` | wide | Real-time log stream with level filtering (All/Info/Warn/Error/Debug), expandable details, auto-scroll |
+| `mcp-island.tsx` | wide | MCP server status display with connection indicators, capability tags, expandable server details |
+
+### Island Patterns
+- All islands use `'use client'` directive
+- Keyboard accessible: Tab/Enter/Escape/Arrow keys for navigation
+- Include loading states (skeleton pulse animation) and empty states (icon + message)
+- Focus visible ring: `focus-visible:ring-2 focus-visible:ring-accent-gold focus-visible:outline-none`
+- Use theme CSS variables throughout (no hardcoded colors)
+- Props interfaces exported for external data binding
 
 ## Key Commands
 - `npm run dev` — Start dev server

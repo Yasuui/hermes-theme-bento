@@ -2,6 +2,11 @@
 
 import Layout from '@/components/islands/layout';
 import BentoCard from '@/components/islands/bento-card';
+import ProfilesIsland from '@/components/islands/profiles-island';
+import ModelsIsland from '@/components/islands/models-island';
+import SkillsIsland from '@/components/islands/skills-island';
+import LogsHud from '@/components/islands/logs-hud';
+import McpIsland from '@/components/islands/mcp-island';
 import { useDashboard } from '@/lib/dashboard-context';
 
 function StatCard({
@@ -184,6 +189,9 @@ export default function Home() {
           </div>
         </BentoCard>
 
+        {/* Profiles Island */}
+        <ProfilesIsland />
+
         {/* Weekly chart — wide */}
         <BentoCard
           title="Weekly Activity"
@@ -215,35 +223,8 @@ export default function Home() {
           </div>
         </BentoCard>
 
-        {/* Recently active projects — tall */}
-        <BentoCard
-          title="Top Projects"
-          description="By activity volume"
-          variant="tall"
-          icon={
-            <svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
-            </svg>
-          }
-        >
-          <div className="space-y-3">
-            {[
-              { name: 'bento-dashboard', files: 142, color: '#c8a45c' },
-              { name: 'rift-expenses', files: 89, color: '#6c5ce7' },
-              { name: 'hermes-agent', files: 312, color: '#00b894' },
-              { name: 'design-system', files: 56, color: '#0984e3' },
-            ].map((p) => (
-              <div key={p.name} className="flex items-center gap-3">
-                <div
-                  className="h-2 w-2 rounded-full"
-                  style={{ backgroundColor: p.color }}
-                />
-                <span className="flex-1 text-sm text-text-primary">{p.name}</span>
-                <span className="text-xs text-text-muted">{p.files} files</span>
-              </div>
-            ))}
-          </div>
-        </BentoCard>
+        {/* Models Island — tall */}
+        <ModelsIsland />
 
         {/* Activity feed — featured */}
         <BentoCard
@@ -262,6 +243,15 @@ export default function Home() {
             ))}
           </div>
         </BentoCard>
+
+        {/* Skills Island — featured */}
+        <SkillsIsland />
+
+        {/* Logs HUD — wide */}
+        <LogsHud />
+
+        {/* MCP Island — wide */}
+        <McpIsland />
 
         {/* Quick action card */}
         <BentoCard
@@ -307,6 +297,36 @@ export default function Home() {
           </div>
         </BentoCard>
 
+        {/* Top Projects */}
+        <BentoCard
+          title="Top Projects"
+          description="By activity volume"
+          variant="tall"
+          icon={
+            <svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+            </svg>
+          }
+        >
+          <div className="space-y-3">
+            {[
+              { name: 'bento-dashboard', files: 142, color: '#c8a45c' },
+              { name: 'rift-expenses', files: 89, color: '#6c5ce7' },
+              { name: 'hermes-agent', files: 312, color: '#00b894' },
+              { name: 'design-system', files: 56, color: '#0984e3' },
+            ].map((p) => (
+              <div key={p.name} className="flex items-center gap-3">
+                <div
+                  className="h-2 w-2 rounded-full"
+                  style={{ backgroundColor: p.color }}
+                />
+                <span className="flex-1 text-sm text-text-primary">{p.name}</span>
+                <span className="text-xs text-text-muted">{p.files} files</span>
+              </div>
+            ))}
+          </div>
+        </BentoCard>
+
         {/* System Status */}
         <BentoCard
           title="System Status"
@@ -347,7 +367,7 @@ export default function Home() {
           </div>
         </BentoCard>
 
-        {/* Upgrade CTA */}
+        {/* Enterprise Plan CTA */}
         <BentoCard
           title="Enterprise Plan"
           description="Unlock premium features"
